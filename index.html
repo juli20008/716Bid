@@ -14,6 +14,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="icon" type="image/x-icon" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="styles.css">
     <meta name="theme-color" content="#000000">
     <meta name="description" content="Online auction platform for bidding on new, returns and canceled orders">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -32,13 +33,6 @@
             }
         }
     </script>
-    <style type="text/tailwindcss">
-        @layer base {
-            body {
-                @apply antialiased text-stone-900 bg-white;
-            }
-        }
-    </style>
 </head>
 <body x-data="{ 
     isMenuOpen: false,
@@ -62,6 +56,23 @@
             this.canInstall = true;
         });
     },
+    openAlarm() {
+        const ua = navigator.userAgent || '';
+        const isAndroid = /Android/i.test(ua);
+        const isIOS = /iPhone|iPad|iPod/i.test(ua);
+
+        if (isAndroid) {
+            window.location.href = 'intent://alarm#Intent;action=android.intent.action.SET_ALARM;end';
+            return;
+        }
+
+        if (isIOS) {
+            window.location.href = 'clock-alarm://';
+            return;
+        }
+
+        alert('Open your device Clock app to set an alarm.');
+    },
     async handleInstall() {
         if (!this.installPrompt) return;
         this.installPrompt.prompt();
@@ -82,9 +93,9 @@
     }
 }">
     <!-- Top Header / Logo Area -->
-    <header class="bg-black py-6 flex flex-col items-center border-b border-yellow-500/20">
+    <header class="bg-black py-6 flex flex-col items-center border-b border-yellow-500/20 site-header">
         <!-- Use <img> to actually show the logo on the page -->
-        <img src="logo.png" alt="716BID Logo" style="height: 150px; width: auto;" />
+        <img src="logo.png" alt="716BID Logo" class="site-logo" />
     </header>
 
     <!-- Navigation -->
@@ -99,20 +110,25 @@
                     <a href="#" class="hover:text-yellow-500 transition-colors">Get Notifications</a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button class="p-2 hover:text-yellow-500 transition-colors">
-                        <i data-lucide="search" class="w-5 h-5"></i>
-                    </button>
                     <!-- 一键添加到桌面按钮 -->
                     <button 
                         x-show="canInstall && !isInstalled"
                         @click="handleInstall()"
-                        class="hidden md:flex items-center space-x-2 bg-yellow-500 text-black font-bold px-4 py-2 rounded-sm hover:bg-yellow-400 transition-all transform hover:scale-105 uppercase tracking-wider text-xs"
-                        title="将应用添加到您的设备"
+                        class="flex items-center space-x-2 bg-yellow-500 text-black font-bold px-3 py-2 rounded-sm hover:bg-yellow-400 transition-all transform hover:scale-105 uppercase tracking-wider text-[10px] md:text-xs"
+                        title="Add to Desktop"
                     >
                         <i data-lucide="download" class="w-4 h-4"></i>
-                        <span>添加到桌面</span>
+                        <span>Add to Home Screen</span>
                     </button>
                     <!-- 已安装状态 -->
+                    <button
+                        @click="openAlarm()"
+                        class="flex items-center space-x-2 bg-stone-800 text-white font-bold px-3 py-2 rounded-sm hover:bg-stone-700 transition-all transform hover:scale-105 uppercase tracking-wider text-[10px] md:text-xs"
+                        title="Set an Alarm"
+                    >
+                        <i data-lucide="alarm-clock" class="w-4 h-4"></i>
+                        <span>Set an Alarm</span>
+                    </button>
                     <div 
                         x-show="isInstalled" 
                         class="hidden md:flex items-center space-x-2 text-yellow-500 font-semibold text-xs"
@@ -154,6 +170,13 @@
                 <span>一键添加到桌面</span>
             </button>
             <!-- 移动端: 已安装状态 -->
+            <button
+                @click="openAlarm(); isMenuOpen = false;"
+                class="w-full flex items-center justify-center space-x-2 bg-stone-800 text-white font-bold px-4 py-3 rounded-sm hover:bg-stone-700 transition-all uppercase tracking-wider"
+            >
+                <i data-lucide="alarm-clock" class="w-5 h-5"></i>
+                <span>Set an Alarm</span>
+            </button>
             <div 
                 x-show="isInstalled" 
                 class="flex items-center justify-center space-x-2 text-yellow-500 font-semibold py-3 text-center"
@@ -333,6 +356,17 @@
                 <button class="bg-yellow-500 text-black px-8 py-3 rounded-sm font-bold hover:bg-yellow-400 transition-colors uppercase text-sm tracking-widest">
                     Sign Up
                 </button>
+                <div class="mt-4">
+                    <!-- Replace text/dates/stz/etz/details/location with your event info -->
+                    <a
+                        href="https://calendar.google.com/calendar/r/eventedit?action=TEMPLATE&text=716BID%20Weekly%20Auction%20Closing&dates=20260303T000000Z%2F20260303T010000Z&stz=America%2FNew_York&etz=America%2FNew_York&details=Weekly%20auction%20closing.%20Update%20date%2Ftime%20and%20details.&location=716BID%2C%20123%20Auction%20Street%2C%20Buffalo%2C%20NY"
+                        target="_blank"
+                        rel="noopener"
+                        class="inline-flex items-center justify-center mt-3 bg-black text-white px-6 py-2 rounded-sm hover:bg-stone-800 transition-colors uppercase text-xs font-bold tracking-widest"
+                    >
+                        Add to Google Calendar
+                    </a>
+                </div>
             </div>
         </div>
     </section>
