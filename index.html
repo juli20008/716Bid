@@ -12,7 +12,7 @@
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <script>
         tailwind.config = {
             theme: {
@@ -36,17 +36,8 @@
 <body x-data="{ isMenuOpen: false }">
     <!-- Top Header / Logo Area -->
     <header class="bg-black py-6 flex flex-col items-center border-b border-yellow-500/20">
-        <div class="relative w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-yellow-500 overflow-hidden bg-black flex items-center justify-center shadow-xl shadow-yellow-500/10">
-            <div class="flex flex-col items-center">
-                <div class="text-yellow-500 mb-1">
-                    <i data-lucide="gavel" class="w-12 h-12"></i>
-                </div>
-                <span class="text-yellow-500 font-black text-2xl tracking-tighter">716BID</span>
-            </div>
-        </div>
-        <div class="mt-4 text-center">
-            <h1 class="text-white text-sm font-medium tracking-widest uppercase">Why Pay Retail? Pay Way Less</h1>
-        </div>
+        <!-- Use <img> to actually show the logo on the page -->
+        <img src="logo.png" alt="716BID Logo" style="height: 150px; width: auto;" />
     </header>
 
     <!-- Navigation -->
@@ -99,7 +90,7 @@
             <div>
                 <h2 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
                     Auctions: Online <br />
-                    <span class="text-yellow-500">Amazon New, Returns</span> <br />
+                    <span class="text-yellow-500">New, Returns</span> <br />
                     and Canceled Orders
                 </h2>
                 <p class="text-stone-400 text-lg mb-8 max-w-lg">
@@ -122,19 +113,6 @@
                 <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-yellow-500 rounded-full blur-3xl opacity-20"></div>
                 <div class="absolute -top-6 -left-6 w-32 h-32 bg-yellow-500 rounded-full blur-3xl opacity-10"></div>
             </div>
-        </div>
-    </section>
-
-    <!-- Welcome Section -->
-    <section class="py-20 bg-stone-50 border-b border-stone-200">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-serif italic text-stone-800 mb-8">Welcome to 716BID Auction</h2>
-            <p class="text-stone-600 leading-relaxed text-lg mb-6">
-                Our goal at 716BID is to provide great quality products that big brand name on line stores carry and sell the exact same product at a heavily discounted price, we can do this by purchasing tractor trailer loads of misguided freight, discontinued items, overstock, and returns from various online retail stores.
-            </p>
-            <p class="text-yellow-600 font-bold text-xl italic">
-                "Why pay retail when you can Pay Way Less"
-            </p>
         </div>
     </section>
 
