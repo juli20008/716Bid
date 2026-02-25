@@ -13,6 +13,13 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="icon" type="image/x-icon" href="/favicon.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Online auction platform for bidding on new, returns and canceled orders">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="716BID">
+    <link rel="apple-touch-icon" href="/logo.png">
     <script>
         tailwind.config = {
             theme: {
@@ -33,7 +40,47 @@
         }
     </style>
 </head>
-<body x-data="{ isMenuOpen: false }">
+<body x-data="{ 
+    isMenuOpen: false,
+    canInstall: false,
+    isInstalled: false,
+    installPrompt: null,
+    init() {
+        this.checkInstallStatus();
+        this.setupInstallPrompt();
+        this.registerServiceWorker();
+    },
+    checkInstallStatus() {
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            this.isInstalled = true;
+        }
+    },
+    setupInstallPrompt() {
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            this.installPrompt = e;
+            this.canInstall = true;
+        });
+    },
+    async handleInstall() {
+        if (!this.installPrompt) return;
+        this.installPrompt.prompt();
+        const { outcome } = await this.installPrompt.userChoice;
+        if (outcome === 'accepted') {
+            this.isInstalled = true;
+            alert('✓ 应用已成功添加到您的设备！');
+        }
+        this.installPrompt = null;
+        this.canInstall = false;
+    },
+    registerServiceWorker() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(reg => console.log('Service Worker registered'))
+                .catch(err => console.log('Service Worker registration failed:', err));
+        }
+    }
+}">
     <!-- Top Header / Logo Area -->
     <header class="bg-black py-6 flex flex-col items-center border-b border-yellow-500/20">
         <!-- Use <img> to actually show the logo on the page -->
@@ -55,6 +102,24 @@
                     <button class="p-2 hover:text-yellow-500 transition-colors">
                         <i data-lucide="search" class="w-5 h-5"></i>
                     </button>
+                    <!-- 一键添加到桌面按钮 -->
+                    <button 
+                        x-show="canInstall && !isInstalled"
+                        @click="handleInstall()"
+                        class="hidden md:flex items-center space-x-2 bg-yellow-500 text-black font-bold px-4 py-2 rounded-sm hover:bg-yellow-400 transition-all transform hover:scale-105 uppercase tracking-wider text-xs"
+                        title="将应用添加到您的设备"
+                    >
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>添加到桌面</span>
+                    </button>
+                    <!-- 已安装状态 -->
+                    <div 
+                        x-show="isInstalled" 
+                        class="hidden md:flex items-center space-x-2 text-yellow-500 font-semibold text-xs"
+                    >
+                        <i data-lucide="check-circle" class="w-4 h-4"></i>
+                        <span>已安装</span>
+                    </div>
                     <button 
                         class="md:hidden p-2 hover:text-yellow-500 transition-colors"
                         @click="isMenuOpen = !isMenuOpen"
@@ -79,8 +144,78 @@
             <a href="#" class="block hover:text-yellow-500 font-semibold uppercase">Auctions</a>
             <a href="#" class="block hover:text-yellow-500 font-semibold uppercase">Contact Us</a>
             <a href="#" class="block hover:text-yellow-500 font-semibold uppercase">Get Notifications</a>
+            <!-- 移动端: 一键添加到桌面 -->
+            <button 
+                x-show="canInstall && !isInstalled"
+                @click="handleInstall(); isMenuOpen = false;"
+                class="w-full flex items-center justify-center space-x-2 bg-yellow-500 text-black font-bold px-4 py-3 rounded-sm hover:bg-yellow-400 transition-all mt-4 uppercase tracking-wider"
+            >
+                <i data-lucide="download" class="w-5 h-5"></i>
+                <span>一键添加到桌面</span>
+            </button>
+            <!-- 移动端: 已安装状态 -->
+            <div 
+                x-show="isInstalled" 
+                class="flex items-center justify-center space-x-2 text-yellow-500 font-semibold py-3 text-center"
+            >
+                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                <span>已添加到桌面 ✓</span>
+            </div>
         </div>
     </nav>
+
+    <!-- Sample Auction Section -->
+    <section class="py-20 bg-stone-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-yellow-600 mb-2">Sample Auction</h2>
+                <p class="text-stone-500 text-sm italic">This image is for illustrative purposes only. These items may not be available in the current auction.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <!-- Auction Item Template -->
+                <template x-for="item in [
+                    { id: 21, title: 'Ensure Plus, Meal Replacement, Complete', bid: '2.00', bids: 2, timeLeft: '5d 2h 19m', image: 'https://picsum.photos/seed/item1/300/300' },
+                    { id: 22, title: 'Astro Pneumatic Tool 78830 Kit drum and', bid: '1.00', bids: 1, timeLeft: '5d 2h 19m', image: 'https://picsum.photos/seed/item2/300/300' },
+                    { id: 23, title: 'Boaraino Steamer Clothes, Garment', bid: '0.00', bids: 0, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item3/300/300' },
+                    { id: 24, title: 'Red Bull Energy Drink 250 ml (Case of 24)', bid: '3.00', bids: 3, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item4/300/300' },
+                    { id: 25, title: 'unitedfoison Automatic KS/K9 Pro Hand', bid: '0.00', bids: 0, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item5/300/300' },
+                    { id: 26, title: 'YEMYHOM - Trendy sofa cover, Grey', bid: '0.00', bids: 0, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item6/300/300' },
+                    { id: 27, title: 'HotHands Body & Hand Super Warmer (40)', bid: '4.00', bids: 4, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item7/300/300' },
+                    { id: 28, title: 'Pepsi cola, 473 mL Cans, 12 Pack FACTORY', bid: '3.00', bids: 3, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item8/300/300' },
+                    { id: 29, title: 'AmeriCare Six Piece Meal Kit', bid: '0.00', bids: 0, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item9/300/300' },
+                    { id: 30, title: 'Etekcity Queen inflatable bed with built-in', bid: '1.00', bids: 1, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item10/300/300' }
+                ]" :key="item.id">
+                    <div class="bg-white border border-stone-200 overflow-hidden flex flex-col hover:-translate-y-1 transition-transform">
+                        <div class="bg-black text-white text-[10px] px-2 py-1 flex justify-between items-center">
+                            <span x-text="'Lot ' + item.id + ' | ' + item.title.substring(0, 20) + '...'"></span>
+                        </div>
+                        <div class="aspect-square relative overflow-hidden group">
+                            <img 
+                                :src="item.image" 
+                                :alt="item.title" 
+                                class="w-full h-full object-cover transition-transform group-hover:scale-110"
+                                referrerpolicy="no-referrer"
+                            >
+                            <div class="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[10px] py-1 px-2 flex items-center justify-center space-x-1">
+                                <i data-lucide="clock" class="w-3 h-3"></i>
+                                <span x-text="item.timeLeft"></span>
+                            </div>
+                        </div>
+                        <div class="p-3 flex-grow flex flex-col justify-between text-center">
+                            <div>
+                                <div class="text-stone-800 font-bold text-sm mb-1" x-text="item.bid + ' CAD'"></div>
+                                <div class="text-stone-400 text-[10px] uppercase" x-text="item.bids + ' Bids'"></div>
+                            </div>
+                            <button class="mt-3 w-full bg-black text-white py-1.5 text-xs font-bold hover:bg-yellow-500 hover:text-black transition-colors">
+                                Bid <span x-text="item.bid"></span>
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
 
     <!-- Hero Section -->
     <section class="bg-black text-white py-16 md:py-24 relative overflow-hidden">
@@ -198,59 +333,6 @@
                 <button class="bg-yellow-500 text-black px-8 py-3 rounded-sm font-bold hover:bg-yellow-400 transition-colors uppercase text-sm tracking-widest">
                     Sign Up
                 </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sample Auction Section -->
-    <section class="py-20 bg-stone-100">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-yellow-600 mb-2">Sample Auction</h2>
-                <p class="text-stone-500 text-sm italic">This image is for illustrative purposes only. These items may not be available in the current auction.</p>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                <!-- Auction Item Template -->
-                <template x-for="item in [
-                    { id: 21, title: 'Ensure Plus, Meal Replacement, Complete', bid: '2.00', bids: 2, timeLeft: '5d 2h 19m', image: 'https://picsum.photos/seed/item1/300/300' },
-                    { id: 22, title: 'Astro Pneumatic Tool 78830 Kit drum and', bid: '1.00', bids: 1, timeLeft: '5d 2h 19m', image: 'https://picsum.photos/seed/item2/300/300' },
-                    { id: 23, title: 'Boaraino Steamer Clothes, Garment', bid: '0.00', bids: 0, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item3/300/300' },
-                    { id: 24, title: 'Red Bull Energy Drink 250 ml (Case of 24)', bid: '3.00', bids: 3, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item4/300/300' },
-                    { id: 25, title: 'unitedfoison Automatic KS/K9 Pro Hand', bid: '0.00', bids: 0, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item5/300/300' },
-                    { id: 26, title: 'YEMYHOM - Trendy sofa cover, Grey', bid: '0.00', bids: 0, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item6/300/300' },
-                    { id: 27, title: 'HotHands Body & Hand Super Warmer (40)', bid: '4.00', bids: 4, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item7/300/300' },
-                    { id: 28, title: 'Pepsi cola, 473 mL Cans, 12 Pack FACTORY', bid: '3.00', bids: 3, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item8/300/300' },
-                    { id: 29, title: 'AmeriCare Six Piece Meal Kit', bid: '0.00', bids: 0, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item9/300/300' },
-                    { id: 30, title: 'Etekcity Queen inflatable bed with built-in', bid: '1.00', bids: 1, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item10/300/300' }
-                ]" :key="item.id">
-                    <div class="bg-white border border-stone-200 overflow-hidden flex flex-col hover:-translate-y-1 transition-transform">
-                        <div class="bg-black text-white text-[10px] px-2 py-1 flex justify-between items-center">
-                            <span x-text="'Lot ' + item.id + ' | ' + item.title.substring(0, 20) + '...'"></span>
-                        </div>
-                        <div class="aspect-square relative overflow-hidden group">
-                            <img 
-                                :src="item.image" 
-                                :alt="item.title" 
-                                class="w-full h-full object-cover transition-transform group-hover:scale-110"
-                                referrerpolicy="no-referrer"
-                            >
-                            <div class="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[10px] py-1 px-2 flex items-center justify-center space-x-1">
-                                <i data-lucide="clock" class="w-3 h-3"></i>
-                                <span x-text="item.timeLeft"></span>
-                            </div>
-                        </div>
-                        <div class="p-3 flex-grow flex flex-col justify-between text-center">
-                            <div>
-                                <div class="text-stone-800 font-bold text-sm mb-1" x-text="item.bid + ' CAD'"></div>
-                                <div class="text-stone-400 text-[10px] uppercase" x-text="item.bids + ' Bids'"></div>
-                            </div>
-                            <button class="mt-3 w-full bg-black text-white py-1.5 text-xs font-bold hover:bg-yellow-500 hover:text-black transition-colors">
-                                Bid <span x-text="item.bid"></span>
-                            </button>
-                        </div>
-                    </div>
-                </template>
             </div>
         </div>
     </section>
