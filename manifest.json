@@ -6,7 +6,7 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "theme_color": "#000000",
+  "theme_color": "#2A4D85",
   "background_color": "#ffffff",
   "icons": [
     {
@@ -24,12 +24,12 @@
   ],
   "screenshots": [
     {
-      "src": "/logo.png",
+      "src": "/logo.jpg",
       "sizes": "540x720",
       "form_factor": "narrow"
     },
     {
-      "src": "/logo.png",
+      "src": "/logo.jpg",
       "sizes": "1280x720",
       "form_factor": "wide"
     }
@@ -43,7 +43,7 @@
       "url": "/?page=auctions",
       "icons": [
         {
-          "src": "/favicon.png",
+          "src": "/favicon-192.png",
           "sizes": "192x192"
         }
       ]

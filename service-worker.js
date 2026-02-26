@@ -1,9 +1,11 @@
-const CACHE_NAME = '716bid-v1';
+const CACHE_NAME = 'bid-buffalo-v2';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/favicon.png',
-  '/logo.png',
+  '/styles.css',
+  '/favicon-192.png',
+  '/favicon-512.png',
+  '/logo.jpg',
   '/manifest.json'
 ];
 

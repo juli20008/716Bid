@@ -44,6 +44,7 @@
     canInstall: false,
     isInstalled: false,
     installPrompt: null,
+    showInstallHelp: false,
     init() {
         this.checkInstallStatus();
         this.setupInstallPrompt();
@@ -70,7 +71,7 @@
     },
     async handleInstall() {
         if (!this.installPrompt) {
-            alert('Install is available from your browser menu: use “Install app” or “Add to Home Screen”.');
+            this.showInstallHelp = true;
             return;
         }
         this.installPrompt.prompt();
@@ -90,8 +91,70 @@
         }
     }
 }">
+    <!-- Install Help Modal -->
+    <div
+        x-show="showInstallHelp"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4"
+    >
+        <div class="bg-white rounded-lg shadow-xl max-w-lg w-full p-6 relative">
+            <button
+                class="absolute top-3 right-3 text-stone-500 hover:text-stone-700"
+                @click="showInstallHelp = false"
+                aria-label="Close"
+            >
+                ✕
+            </button>
+            <h3 class="text-2xl font-bold text-[#2A4D85] mb-2">Install Bid Buffalo</h3>
+            <p class="text-stone-600 mb-4">Use the exact steps below (pick your device):</p>
+            <div class="space-y-4 text-stone-700">
+                <div>
+                    <div class="font-semibold">iPhone / iPad (Safari)</div>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>Open this site in Safari (not Chrome).</li>
+                        <li>Tap the Share button (⬆ at the bottom).</li>
+                        <li>Scroll and tap “Add to Home Screen”.</li>
+                        <li>Tap “Add”.</li>
+                    </ol>
+                </div>
+                <div>
+                    <div class="font-semibold">Android (Chrome)</div>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>Tap the menu (⋮) in the top‑right.</li>
+                        <li>Tap “Install app” or “Add to Home Screen”.</li>
+                        <li>Tap “Install/Add”.</li>
+                    </ol>
+                </div>
+                <div>
+                    <div class="font-semibold">Desktop (Edge)</div>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>Click the menu (⋯) in the top‑right.</li>
+                        <li>Click “Apps”.</li>
+                        <li>Click “Install this site as an app”.</li>
+                    </ol>
+                </div>
+                <div>
+                    <div class="font-semibold">Desktop (Chrome)</div>
+                    <ol class="list-decimal pl-5 space-y-1">
+                        <li>Click the Install icon in the address bar (if shown), or open the menu (⋮).</li>
+                        <li>Click “Install Bid Buffalo”.</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="mt-5 flex justify-end">
+                <button
+                    class="bg-[#2A4D85] text-white px-4 py-2 rounded-sm hover:bg-blue-900 transition-colors"
+                    @click="showInstallHelp = false"
+                >
+                    Got it
+                </button>
+            </div>
+        </div>
+    </div>
     <!-- Top Header / Logo Area -->
-    <header id="home" class="bg-[#2A4D85] py-6 flex flex-col items-center border-b border-yellow-500/20 site-header">
+    <header id="home" class="bg-white py-6 flex flex-col items-center border-b border-yellow-500/20 site-header">
         <img src="logo.png" alt="Bid Buffalo Logo" class="site-logo" />
     </header>
     <!-- Navigation -->
@@ -108,6 +171,7 @@
                 <div class="flex items-center space-x-4">
                     <!-- 一键添加到桌面按钮 -->
                     <button 
+                        x-show="!isInstalled"
                         @click="handleInstall()"
                         class="flex items-center space-x-2 bg-yellow-500 text-[#2A4D85] font-bold px-3 py-2 rounded-sm hover:bg-yellow-400 transition-all transform hover:scale-105 uppercase tracking-wider text-[10px] md:text-xs"
                         title="Add to Desktop"
@@ -156,6 +220,7 @@
             <a href="#notifications" class="block hover:text-yellow-500 font-semibold uppercase">Get Notifications</a>
             <!-- 移动端: 一键添加到桌面 -->
             <button 
+                x-show="!isInstalled"
                 @click="handleInstall(); isMenuOpen = false;"
                 class="w-full flex items-center justify-center space-x-2 bg-yellow-500 text-[#2A4D85] font-bold px-4 py-3 rounded-sm hover:bg-yellow-400 transition-all mt-4 uppercase tracking-wider"
             >
@@ -175,7 +240,7 @@
                 class="flex items-center justify-center space-x-2 text-yellow-500 font-semibold py-3 text-center"
             >
                 <i data-lucide="check-circle" class="w-5 h-5"></i>
-                <span>已添加到桌面 ✓</span>
+                <span>已安装 ✓</span>
             </div>
         </div>
     </nav>
@@ -462,6 +527,7 @@
     </script>
 </body>
 </html>
+
 
 
 
