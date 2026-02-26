@@ -26,7 +26,7 @@ img {
 .site-logo {
     height: auto;
     width: auto;
-    max-height: 150px;
+    max-height: 140px;
     max-width: 100%;
     object-fit: contain;
     display: block;
@@ -46,7 +46,7 @@ img {
     }
 
     .site-logo {
-        max-height: 96px;
+        max-height: 100px;
     }
 }
 
@@ -57,6 +57,6 @@ img {
     }
 
     .site-logo {
-        max-height: 80px;
+        max-height: 90px;
     }
 }
