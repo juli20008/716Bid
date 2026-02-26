@@ -1,7 +1,7 @@
 {
-  "name": "716BID - Online Auctions",
-  "short_name": "716BID",
-  "description": "Online auction platform for bidding",
+  "name": "Bid Buffalo - Online Auctions",
+  "short_name": "Bid Buffalo",
+  "description": "Bid Buffalo online auctions in Buffalo, NY",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
