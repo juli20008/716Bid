@@ -20,7 +20,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="716BID">
-    <link rel="apple-touch-icon" href="/logo.jpg">
+    <link rel="apple-touch-icon" href="/logo.png">
     <script>
         tailwind.config = {
             theme: {
@@ -85,21 +85,21 @@
         }
     }
 }">
-    <!-- Navigation + Logo -->
-    <nav id="home" class="bg-[#2A4D85] text-white sticky top-0 z-50 border-b border-yellow-500/10">
+    <!-- Top Header / Logo Area -->
+    <header id="home" class="bg-[#2A4D85] py-6 flex flex-col items-center border-b border-yellow-500/20 site-header">
+        <img src="logo.png" alt="716BID Logo" class="site-logo" />
+    </header>
+    <!-- Navigation -->
+    <nav class="bg-[#2A4D85] text-white sticky top-0 z-50 border-b border-yellow-500/10">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex items-center justify-between h-24 md:h-28">
-                <a href="#home" class="flex items-center">
-                    <img src="logo.jpg" alt="716BID Logo" class="site-logo" />
-                </a>
-                <div class="flex items-center space-x-6">
-                    <div class="hidden md:flex space-x-8 text-sm font-semibold uppercase tracking-wider">
-                        <a href="#home" class="text-yellow-500 hover:text-yellow-400 transition-colors">Home</a>
-                        <a href="#about" class="hover:text-yellow-500 transition-colors">About Us</a>
-                        <a href="#auctions" class="hover:text-yellow-500 transition-colors">Auctions</a>
-                        <a href="#contact" class="hover:text-yellow-500 transition-colors">Contact Us</a>
-                        <a href="#notifications" class="hover:text-yellow-500 transition-colors">Get Notifications</a>
-                    </div>
+            <div class="flex justify-between items-center h-14">
+                <div class="hidden md:flex space-x-8 text-sm font-semibold uppercase tracking-wider">
+                    <a href="#home" class="text-yellow-500 hover:text-yellow-400 transition-colors">Home</a>
+                    <a href="#about" class="hover:text-yellow-500 transition-colors">About Us</a>
+                    <a href="#auctions" class="hover:text-yellow-500 transition-colors">Auctions</a>
+                    <a href="#contact" class="hover:text-yellow-500 transition-colors">Contact Us</a>
+                    <a href="#notifications" class="hover:text-yellow-500 transition-colors">Get Notifications</a>
+                </div>
                 <div class="flex items-center space-x-4">
                     <!-- 一键添加到桌面按钮 -->
                     <button 
@@ -135,9 +135,7 @@
                     </button>
                 </div>
             </div>
-            </div>
         </div>
-        
         <!-- Mobile Menu -->
         <div 
             x-show="isMenuOpen"
@@ -459,5 +457,7 @@
     </script>
 </body>
 </html>
+
+
 
 
