@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bid Buffalo | Online Auctions in Buffalo, NY</title>
+    <title>Bid Buffalo | Premium Online Auctions</title>
     <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Alpine.js for State Management -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Lucide Icons -->
@@ -15,12 +15,12 @@
     <link rel="icon" type="image/x-icon" href="/favicon.png">
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="styles.css">
-    <meta name="theme-color" content="#000000">
-    <meta name="description" content="Bid Buffalo offers online auctions in Buffalo, NY for new, returns, and canceled orders. Bid on electronics, tools, toys, home goods, and more.">
+    <meta name="theme-color" content="#1e3a8a">
+    <meta name="description" content="Bid Buffalo: The premier destination for online auctions in Buffalo, NY. Discover incredible deals on electronics, tools, home goods, and more.">
     <meta name="keywords" content="Bid Buffalo, Buffalo auctions, online auctions Buffalo NY, liquidation auctions, returns auctions, local pickup auctions">
     <meta name="robots" content="index,follow">
-    <meta property="og:title" content="Bid Buffalo | Online Auctions in Buffalo, NY">
-    <meta property="og:description" content="Bid Buffalo offers online auctions in Buffalo, NY for new, returns, and canceled orders. Bid on electronics, tools, toys, home goods, and more.">
+    <meta property="og:title" content="Bid Buffalo | Premium Online Auctions">
+    <meta property="og:description" content="Discover incredible deals on electronics, tools, home goods, and more at Bid Buffalo.">
     <meta property="og:type" content="website">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -30,9 +30,20 @@
         tailwind.config = {
             theme: {
                 extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#1e3a8a',
+                            dark: '#172554',
+                            light: '#3b82f6',
+                        },
+                        accent: {
+                            DEFAULT: '#fbbf24',
+                            dark: '#f59e0b',
+                        }
+                    },
                     fontFamily: {
                         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-                        serif: ['Playfair Display', 'ui-serif', 'Georgia', 'serif'],
+                        display: ['Outfit', 'sans-serif'],
                     },
                 }
             }
@@ -242,49 +253,38 @@
         </div>
     </div>
     <!-- Top Header / Logo Area -->
-    <header id="home" class="bg-white py-6 flex flex-col items-center border-b border-yellow-500/20 site-header">
-        <img src="logo.png" alt="Bid Buffalo Logo" class="site-logo" />
+    <header id="home" class="bg-white py-4 flex flex-col items-center border-b border-slate-100 site-header">
+        <img src="logo.png" alt="Bid Buffalo Logo" class="site-logo h-16 md:h-20" />
     </header>
     <!-- Navigation -->
-    <nav class="bg-[#2A4D85] text-white sticky top-0 z-50 border-b border-yellow-500/10">
+    <nav class="bg-primary text-white sticky top-0 z-50 shadow-md">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center h-14">
-                <div class="hidden md:flex space-x-8 text-sm font-semibold uppercase tracking-wider">
-                    <a href="#home" class="text-yellow-500 hover:text-yellow-400 transition-colors">Home</a>
-                    <a href="#about" class="hover:text-yellow-500 transition-colors">About Us</a>
-                    <a href="#auctions" class="hover:text-yellow-500 transition-colors">Auctions</a>
-                    <a href="#contact" class="hover:text-yellow-500 transition-colors">Contact Us</a>
-                    <a href="#notifications" class="hover:text-yellow-500 transition-colors">Get Notifications</a>
+            <div class="flex justify-between items-center h-16">
+                <div class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest">
+                    <a href="#home" class="text-accent hover:text-white transition-colors">Home</a>
+                    <a href="#auctions" class="hover:text-accent transition-colors">Live Auctions</a>
+                    <a href="#how-it-works" class="hover:text-accent transition-colors">How It Works</a>
+                    <a href="#about" class="hover:text-accent transition-colors">About Us</a>
+                    <a href="#contact" class="hover:text-accent transition-colors">Contact</a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <!-- 一键添加到桌面按钮 -->
                     <button 
                         x-show="!isInstalled"
                         @click="handleInstall()"
-                        class="flex items-center space-x-2 bg-yellow-500 text-[#2A4D85] font-bold px-3 py-2 rounded-sm hover:bg-yellow-400 transition-all transform hover:scale-105 uppercase tracking-wider text-[10px] md:text-xs"
-                        title="Add to Desktop"
+                        class="flex items-center space-x-2 bg-accent text-primary-dark font-black px-4 py-2 rounded-full hover:bg-white transition-all transform hover:scale-105 uppercase tracking-wider text-[10px] shadow-lg"
                     >
-                        <i data-lucide="download" class="w-4 h-4"></i>
-                        <span>Add to Home Screen</span>
+                        <i data-lucide="smartphone" class="w-4 h-4"></i>
+                        <span>Install App</span>
                     </button>
-                    <!-- 已安装状态 -->
                     <button
                         @click="openCalendar()"
-                        class="flex items-center space-x-2 bg-stone-800 text-white font-bold px-3 py-2 rounded-sm hover:bg-stone-700 transition-all transform hover:scale-105 uppercase tracking-wider text-[10px] md:text-xs"
-                        title="Add to Google Calendar"
+                        class="flex items-center space-x-2 bg-primary-dark text-white font-bold px-4 py-2 rounded-full hover:bg-slate-800 transition-all transform hover:scale-105 uppercase tracking-wider text-[10px] border border-white/10"
                     >
-                        <i data-lucide="calendar-plus" class="w-4 h-4"></i>
-                        <span>Add to Google Calendar</span>
+                        <i data-lucide="calendar" class="w-4 h-4"></i>
+                        <span class="hidden sm:inline">Add to Calendar</span>
                     </button>
-                    <div 
-                        x-show="isInstalled" 
-                        class="hidden md:flex items-center space-x-2 text-yellow-500 font-semibold text-xs"
-                    >
-                        <i data-lucide="check-circle" class="w-4 h-4"></i>
-                        <span>已安装</span>
-                    </div>
                     <button 
-                        class="md:hidden p-2 hover:text-yellow-500 transition-colors"
+                        class="md:hidden p-2 hover:text-accent transition-colors"
                         @click="isMenuOpen = !isMenuOpen"
                     >
                         <i x-show="!isMenuOpen" data-lucide="menu" class="w-6 h-6"></i>
@@ -299,312 +299,442 @@
             x-transition:enter="transition ease-out duration-200"
             x-transition:enter-start="opacity-0 -translate-y-4"
             x-transition:enter-end="opacity-100 translate-y-0"
-            class="md:hidden bg-stone-900 border-t border-yellow-500/10 px-4 py-4 space-y-4"
+            class="md:hidden bg-primary-dark border-t border-white/10 px-4 py-6 space-y-4"
         >
-            <a href="#home" class="block text-yellow-500 font-semibold uppercase">Home</a>
-            <a href="#about" class="block hover:text-yellow-500 font-semibold uppercase">About Us</a>
-            <a href="#auctions" class="block hover:text-yellow-500 font-semibold uppercase">Auctions</a>
-            <a href="#contact" class="block hover:text-yellow-500 font-semibold uppercase">Contact Us</a>
-            <a href="#notifications" class="block hover:text-yellow-500 font-semibold uppercase">Get Notifications</a>
-            <!-- 移动端: 一键添加到桌面 -->
-            <button 
-                x-show="!isInstalled"
-                @click="handleInstall(); isMenuOpen = false;"
-                class="w-full flex items-center justify-center space-x-2 bg-yellow-500 text-[#2A4D85] font-bold px-4 py-3 rounded-sm hover:bg-yellow-400 transition-all mt-4 uppercase tracking-wider"
-            >
-                <i data-lucide="download" class="w-5 h-5"></i>
-                <span>Add to Home Screen</span>
-            </button>
-            <!-- 移动端: 已安装状态 -->
-            <button
-                @click="openCalendar(); isMenuOpen = false;"
-                class="w-full flex items-center justify-center space-x-2 bg-stone-800 text-white font-bold px-4 py-3 rounded-sm hover:bg-stone-700 transition-all uppercase tracking-wider"
-            >
-                <i data-lucide="calendar-plus" class="w-5 h-5"></i>
-                <span>Add to Google Calendar</span>
-            </button>
-            <div 
-                x-show="isInstalled" 
-                class="flex items-center justify-center space-x-2 text-yellow-500 font-semibold py-3 text-center"
-            >
-                <i data-lucide="check-circle" class="w-5 h-5"></i>
-                <span>已安装 ✓</span>
-            </div>
+            <a href="#home" @click="isMenuOpen = false" class="block text-accent font-bold uppercase tracking-widest text-xs">Home</a>
+            <a href="#auctions" @click="isMenuOpen = false" class="block hover:text-accent font-bold uppercase tracking-widest text-xs">Live Auctions</a>
+            <a href="#how-it-works" @click="isMenuOpen = false" class="block hover:text-accent font-bold uppercase tracking-widest text-xs">How It Works</a>
+            <a href="#about" @click="isMenuOpen = false" class="block hover:text-accent font-bold uppercase tracking-widest text-xs">About Us</a>
+            <a href="#contact" @click="isMenuOpen = false" class="block hover:text-accent font-bold uppercase tracking-widest text-xs">Contact</a>
         </div>
     </nav>
 
-    <!-- Sample Auction Section -->
-    <section id="auctions" class="py-20 bg-stone-100">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-yellow-600 mb-2">Sample Auction</h2>
-                <p class="text-stone-500 text-sm italic">This image is for illustrative purposes only. These items may not be available in the current auction.</p>
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20 md:py-32 relative overflow-hidden hero-pattern">
+        <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+            <div class="text-center lg:text-left">
+                <div class="inline-flex items-center space-x-2 bg-accent/20 text-accent px-4 py-2 rounded-full text-xs font-black uppercase tracking-[0.2em] mb-6 animate-pulse-soft">
+                    <span class="w-2 h-2 bg-accent rounded-full"></span>
+                    <span>Live Auctions Closing Weekly</span>
+                </div>
+                <h2 class="text-5xl md:text-7xl font-display font-black leading-[0.9] mb-8 tracking-tighter">
+                    BID. WIN. <br />
+                    <span class="text-accent">SAVE BIG.</span>
+                </h2>
+                <p class="text-slate-300 text-lg md:text-xl mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
+                    Join Buffalo's premier online auction. Get up to <span class="text-white font-bold">90% OFF</span> retail on electronics, tools, home goods, and more.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <a href="#auctions" class="w-full sm:w-auto bg-accent text-primary-dark font-black px-10 py-5 rounded-full hover:bg-white transition-all transform hover:scale-105 shadow-2xl uppercase tracking-widest text-sm text-center">
+                        Start Bidding Now
+                    </a>
+                    <a href="#how-it-works" class="w-full sm:w-auto bg-white/10 text-white font-bold px-10 py-5 rounded-full hover:bg-white/20 transition-all border border-white/20 uppercase tracking-widest text-sm text-center backdrop-blur-sm">
+                        How It Works
+                    </a>
+                </div>
             </div>
             
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div class="relative hidden lg:block">
+                <div class="relative z-10 transform rotate-2 hover:rotate-0 transition-transform duration-700">
+                    <img 
+                        src="https://picsum.photos/seed/auction/800/600" 
+                        alt="Bid Buffalo Auction" 
+                        class="rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.5)] border-8 border-white/10"
+                        referrerpolicy="no-referrer"
+                    >
+                    <div class="absolute -bottom-10 -left-10 bg-white p-6 rounded-2xl shadow-2xl text-primary-dark max-w-[200px]">
+                        <div class="text-3xl font-black mb-1">1,300+</div>
+                        <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Lots Available Weekly</div>
+                    </div>
+                </div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-accent/10 rounded-full blur-[100px] -z-10"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="bg-slate-900 py-6 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-accent text-2xl font-black">90%</div>
+                    <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Max Savings</div>
+                </div>
+                <div>
+                    <div class="text-white text-2xl font-black">10k+</div>
+                    <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Happy Bidders</div>
+                </div>
+                <div>
+                    <div class="text-white text-2xl font-black">Weekly</div>
+                    <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Auction Cycles</div>
+                </div>
+                <div>
+                    <div class="text-white text-2xl font-black">Local</div>
+                    <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Buffalo Pickup</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trust Bar -->
+    <div class="bg-white py-12 border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="text-center text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-8">Trusted by Buffalo's Smartest Shoppers</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-30 grayscale">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" class="h-6 md:h-8" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg" alt="Walmart" class="h-6 md:h-8" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Target_Corporation_logo_vector.svg" alt="Target" class="h-6 md:h-8" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Home_Depot.svg" alt="Home Depot" class="h-6 md:h-8" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Best_Buy_logo.svg" alt="Best Buy" class="h-6 md:h-8" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Sample Auction Section -->
+    <section id="auctions" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <h2 class="text-4xl font-display font-black text-slate-900 mb-4 tracking-tight">Featured Lots</h2>
+                    <p class="text-slate-500 max-w-md">Explore a sample of our current inventory. New items added every Wednesday!</p>
+                </div>
+                <div class="flex items-center space-x-2 bg-white p-1 rounded-full shadow-sm border border-slate-200">
+                    <button class="bg-primary text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider">All Items</button>
+                    <button class="text-slate-500 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider hover:bg-slate-100">Closing Soon</button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 <!-- Auction Item Template -->
                 <template x-for="item in [
-                    { id: 21, title: 'Ensure Plus, Meal Replacement, Complete', bid: '2.00', bids: 2, timeLeft: '5d 2h 19m', image: 'https://picsum.photos/seed/item1/300/300' },
-                    { id: 22, title: 'Astro Pneumatic Tool 78830 Kit drum and', bid: '1.00', bids: 1, timeLeft: '5d 2h 19m', image: 'https://picsum.photos/seed/item2/300/300' },
-                    { id: 23, title: 'Boaraino Steamer Clothes, Garment', bid: '0.00', bids: 0, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item3/300/300' },
-                    { id: 24, title: 'Red Bull Energy Drink 250 ml (Case of 24)', bid: '3.00', bids: 3, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item4/300/300' },
-                    { id: 25, title: 'unitedfoison Automatic KS/K9 Pro Hand', bid: '0.00', bids: 0, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item5/300/300' },
-                    { id: 26, title: 'YEMYHOM - Trendy sofa cover, Grey', bid: '0.00', bids: 0, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item6/300/300' },
-                    { id: 27, title: 'HotHands Body & Hand Super Warmer (40)', bid: '4.00', bids: 4, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item7/300/300' },
-                    { id: 28, title: 'Pepsi cola, 473 mL Cans, 12 Pack FACTORY', bid: '3.00', bids: 3, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item8/300/300' },
-                    { id: 29, title: 'AmeriCare Six Piece Meal Kit', bid: '0.00', bids: 0, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item9/300/300' },
-                    { id: 30, title: 'Etekcity Queen inflatable bed with built-in', bid: '1.00', bids: 1, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item10/300/300' }
+                    { id: 21, title: 'Ensure Plus, Meal Replacement', bid: '2.00', bids: 2, timeLeft: '5d 2h 19m', image: 'https://picsum.photos/seed/item1/400/400' },
+                    { id: 22, title: 'Astro Pneumatic Tool Kit', bid: '1.00', bids: 1, timeLeft: '5d 2h 19m', image: 'https://picsum.photos/seed/item2/400/400' },
+                    { id: 23, title: 'Boaraino Steamer Clothes', bid: '0.00', bids: 0, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item3/400/400' },
+                    { id: 24, title: 'Red Bull Energy Drink (24pk)', bid: '3.00', bids: 3, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item4/400/400' },
+                    { id: 25, title: 'Automatic KS/K9 Pro Hand', bid: '0.00', bids: 0, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item5/400/400' },
+                    { id: 26, title: 'YEMYHOM Trendy Sofa Cover', bid: '0.00', bids: 0, timeLeft: '5d 2h 20m', image: 'https://picsum.photos/seed/item6/400/400' },
+                    { id: 27, title: 'HotHands Body & Hand Warmer', bid: '4.00', bids: 4, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item7/400/400' },
+                    { id: 28, title: 'Pepsi Cola Cans (12 Pack)', bid: '3.00', bids: 3, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item8/400/400' },
+                    { id: 29, title: 'AmeriCare Six Piece Meal Kit', bid: '0.00', bids: 0, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item9/400/400' },
+                    { id: 30, title: 'Etekcity Queen Inflatable Bed', bid: '1.00', bids: 1, timeLeft: '5d 2h 21m', image: 'https://picsum.photos/seed/item10/400/400' }
                 ]" :key="item.id">
-                    <div class="bg-white border border-stone-200 overflow-hidden flex flex-col hover:-translate-y-1 transition-transform">
-                        <div class="bg-[#2A4D85] text-white text-[10px] px-2 py-1 flex justify-between items-center">
-                            <span x-text="'Lot ' + item.id + ' | ' + item.title.substring(0, 20) + '...'"></span>
-                        </div>
-                        <div class="aspect-square relative overflow-hidden group">
+                    <div class="auction-card rounded-2xl overflow-hidden flex flex-col group" x-init="$nextTick(() => lucide.createIcons())">
+                        <div class="relative aspect-square overflow-hidden">
                             <img 
                                 :src="item.image" 
                                 :alt="item.title" 
-                                class="w-full h-full object-cover transition-transform group-hover:scale-110"
+                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 referrerpolicy="no-referrer"
                             >
-                            <div class="absolute bottom-0 left-0 right-0 bg-[#2A4D85]/60 text-white text-[10px] py-1 px-2 flex items-center justify-center space-x-1">
-                                <i data-lucide="clock" class="w-3 h-3"></i>
-                                <span x-text="item.timeLeft"></span>
+                            <div class="absolute top-3 left-3 bg-primary/90 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest backdrop-blur-sm">
+                                Lot <span x-text="item.id"></span>
+                            </div>
+                            <div class="absolute bottom-3 left-3 right-3 bg-black/60 backdrop-blur-md text-white text-[10px] py-2 px-3 rounded-xl flex items-center justify-between font-bold">
+                                <div class="flex items-center">
+                                    <i data-lucide="clock" class="w-3 h-3 mr-1.5 text-accent"></i>
+                                    <span x-text="item.timeLeft"></span>
+                                </div>
+                                <div class="text-accent" x-text="item.bids + ' Bids'"></div>
                             </div>
                         </div>
-                        <div class="p-3 flex-grow flex flex-col justify-between text-center">
-                            <div>
-                                <div class="text-stone-800 font-bold text-sm mb-1" x-text="item.bid + ' CAD'"></div>
-                                <div class="text-stone-400 text-[10px] uppercase" x-text="item.bids + ' Bids'"></div>
+                        <div class="p-5 flex-grow flex flex-col">
+                            <h3 class="text-slate-800 font-bold text-sm mb-4 line-clamp-2 min-h-[2.5rem]" x-text="item.title"></h3>
+                            <div class="flex items-end justify-between mt-auto">
+                                <div>
+                                    <div class="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-1">Current Bid</div>
+                                    <div class="text-primary text-xl font-black leading-none" x-text="'$' + item.bid"></div>
+                                </div>
+                                <button class="bid-button bg-primary hover:bg-primary-dark text-white p-3 rounded-xl transition-all shadow-lg shadow-primary/20">
+                                    <i data-lucide="gavel" class="w-5 h-5"></i>
+                                </button>
                             </div>
-                            <button class="mt-3 w-full bg-[#2A4D85] text-white py-1.5 text-xs font-bold hover:bg-yellow-500 hover:text-[#2A4D85] transition-colors">
-                                Bid <span x-text="item.bid"></span>
-                            </button>
                         </div>
                     </div>
                 </template>
             </div>
+            
+            <div class="mt-16 text-center">
+                <a href="#" class="inline-flex items-center space-x-2 text-primary font-black uppercase tracking-[0.2em] text-xs hover:text-accent transition-colors group">
+                    <span>View All 1,300+ Lots</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- Hero Section -->
-    <section class="bg-[#2A4D85] text-white py-16 md:py-24 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-1/2 h-full bg-yellow-500/5 skew-x-12 transform translate-x-20"></div>
-        
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center relative z-10">
-            <div id="about">
-                <h2 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
-                    Auctions: Online <br />
-                    <span class="text-yellow-500">New, Returns</span> <br />
-                    and Canceled Orders
-                </h2>
-                <p class="text-stone-400 text-lg mb-8 max-w-lg">
-                    AUCTION INCLUDES: Electronics, tools, toys, Beauty products, pet supplies, housewares, clothing and much more! Over 1300 lots!
-                </p>
-                <button class="bg-yellow-500 text-[#2A4D85] font-bold px-8 py-4 rounded-sm hover:bg-yellow-400 transition-all transform hover:scale-105 shadow-lg shadow-yellow-500/20 uppercase tracking-widest">
-                    View the Auction
-                </button>
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl font-display font-black text-slate-900 mb-4 tracking-tight">Simple 3-Step Process</h2>
+                <p class="text-slate-500">Getting started with Bid Buffalo is easier than you think.</p>
             </div>
             
-            <div class="relative">
-                <div class="relative z-10">
-                    <img 
-                        src="https://picsum.photos/seed/devices/800/600" 
-                        alt="Auction App" 
-                        class="rounded-lg shadow-2xl border border-yellow-500/20"
-                        referrerpolicy="no-referrer"
-                    >
+            <div class="grid md:grid-cols-3 gap-12 relative">
+                <!-- Connector Lines (Desktop) -->
+                <div class="hidden md:block absolute top-1/2 left-1/4 right-1/4 h-0.5 bg-slate-100 -translate-y-1/2 -z-10"></div>
+                
+                <div class="text-center group">
+                    <div class="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm border border-slate-100">
+                        <i data-lucide="user-plus" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">1. Register</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Create your free account in minutes. Securely link your payment method to start bidding instantly.</p>
                 </div>
-                <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-yellow-500 rounded-full blur-3xl opacity-20"></div>
-                <div class="absolute -top-6 -left-6 w-32 h-32 bg-yellow-500 rounded-full blur-3xl opacity-10"></div>
+                
+                <div class="text-center group">
+                    <div class="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm border border-slate-100">
+                        <i data-lucide="gavel" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">2. Bid & Win</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Browse thousands of items. Place your bids and track them in real-time. Auctions close every Tuesday.</p>
+                </div>
+                
+                <div class="text-center group">
+                    <div class="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-sm border border-slate-100">
+                        <i data-lucide="package-check" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">3. Local Pickup</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed">Win an item? Simply pick it up at our Buffalo warehouse during our convenient pickup windows.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Info Grid -->
-    <section class="py-20 max-w-7xl mx-auto px-4">
-        <div class="grid md:grid-cols-3 gap-12">
-            <!-- How It Works -->
-            <div id="contact">
-                <h3 class="text-2xl font-bold mb-6 flex items-center">
-                    <span class="w-8 h-8 bg-yellow-500 text-[#2A4D85] rounded-full flex items-center justify-center mr-3 text-sm">01</span>
-                    How It Works
-                </h3>
-                <ul class="space-y-4 text-stone-600">
-                    <li class="flex items-start">
-                        <i data-lucide="chevron-right" class="text-yellow-500 mr-2 mt-1 flex-shrink-0 w-4 h-4"></i>
-                        Register on line in link below.
-                    </li>
-                    <li class="flex items-start">
-                        <i data-lucide="chevron-right" class="text-yellow-500 mr-2 mt-1 flex-shrink-0 w-4 h-4"></i>
-                        Bid on only the items you want.
-                    </li>
-                    <li class="flex items-start">
-                        <i data-lucide="chevron-right" class="text-yellow-500 mr-2 mt-1 flex-shrink-0 w-4 h-4"></i>
-                        Auction begins closing at 7 PM on Tuesday nights and will go through each item.
-                    </li>
-                    <li class="flex items-start">
-                        <i data-lucide="chevron-right" class="text-yellow-500 mr-2 mt-1 flex-shrink-0 w-4 h-4"></i>
-                        If you're the winner you'll be emailed and charged on the credit card you registered with.
-                    </li>
-                    <li class="flex items-start">
-                        <i data-lucide="chevron-right" class="text-yellow-500 mr-2 mt-1 flex-shrink-0 w-4 h-4"></i>
-                        Pick up items during the pick up times on the top of your invoice!
-                    </li>
-                </ul>
+    <!-- Why Us Section -->
+    <section class="py-24 bg-slate-900 text-white overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-20 items-center">
+            <div class="relative">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-4">
+                        <div class="bg-white/5 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                            <i data-lucide="shield-check" class="w-10 h-10 text-accent mb-6"></i>
+                            <h4 class="text-lg font-bold mb-2">Verified Items</h4>
+                            <p class="text-slate-400 text-xs">We inspect and categorize every lot so you know exactly what you're bidding on.</p>
+                        </div>
+                        <div class="bg-primary p-8 rounded-3xl shadow-2xl">
+                            <i data-lucide="truck" class="w-10 h-10 text-white mb-6"></i>
+                            <h4 class="text-lg font-bold mb-2 text-white">Curbside Pickup</h4>
+                            <p class="text-white/70 text-xs">Fast, easy, and safe pickup process at our local Buffalo facility.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 pt-12">
+                        <div class="bg-accent p-8 rounded-3xl shadow-2xl text-primary-dark">
+                            <i data-lucide="trending-down" class="w-10 h-10 mb-6"></i>
+                            <h4 class="text-lg font-bold mb-2">Unbeatable Prices</h4>
+                            <p class="text-primary-dark/70 text-xs">Most items start at $0. Savings of up to 90% off retail prices.</p>
+                        </div>
+                        <div class="bg-white/5 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+                            <i data-lucide="refresh-cw" class="w-10 h-10 text-accent mb-6"></i>
+                            <h4 class="text-lg font-bold mb-2">Weekly Cycles</h4>
+                            <p class="text-slate-400 text-xs">Fresh inventory every single week. There's always something new to find.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <!-- Details -->
-            <div id="about">
-                <h3 class="text-2xl font-bold mb-6 flex items-center">
-                    <span class="w-8 h-8 bg-yellow-500 text-[#2A4D85] rounded-full flex items-center justify-center mr-3 text-sm">02</span>
-                    Details
-                </h3>
-                <ul class="space-y-4 text-stone-600">
-                    <li class="flex items-start">
-                        <i data-lucide="chevron-right" class="text-yellow-500 mr-2 mt-1 flex-shrink-0 w-4 h-4"></i>
-                        Most items start at $0
-                    </li>
-                    <li class="flex items-start">
-                        <i data-lucide="chevron-right" class="text-yellow-500 mr-2 mt-1 flex-shrink-0 w-4 h-4"></i>
-                        Online viewing only
-                    </li>
-                    <li class="flex items-start">
-                        <i data-lucide="chevron-right" class="text-yellow-500 mr-2 mt-1 flex-shrink-0 w-4 h-4"></i>
-                        All items are pick up only at our location after auction closing.
-                    </li>
-                    <li class="flex items-start">
-                        <i data-lucide="chevron-right" class="text-yellow-500 mr-2 mt-1 flex-shrink-0 w-4 h-4"></i>
-                        We are offering curbside pickups
-                    </li>
-                    <li class="flex items-start">
-                        <i data-lucide="chevron-right" class="text-yellow-500 mr-2 mt-1 flex-shrink-0 w-4 h-4"></i>
-                        15% buyers premium and HST applies
-                    </li>
-                    <li class="flex items-start">
-                        <i data-lucide="chevron-right" class="text-yellow-500 mr-2 mt-1 flex-shrink-0 w-4 h-4"></i>
-                        Bidding will begin every Wednesday evening.
-                    </li>
-                </ul>
-                <button class="mt-8 bg-[#2A4D85] text-white px-6 py-2 rounded-sm hover:bg-stone-800 transition-colors uppercase text-sm font-bold tracking-widest">
-                    Go to Auctions
-                </button>
+            
+            <div>
+                <h2 class="text-4xl font-display font-black mb-8 tracking-tight">Why Buffalo Bidders <br /><span class="text-accent">Choose Us</span></h2>
+                <div class="space-y-8">
+                    <div class="flex items-start space-x-6">
+                        <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="check" class="w-6 h-6 text-accent"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Transparent Bidding</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed">No hidden fees. 15% buyer's premium and standard HST. Everything is clearly stated before you bid.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-6">
+                        <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="check" class="w-6 h-6 text-accent"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">Local Support</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed">We're a local Buffalo business. Our team is here to help you through every step of the process.</p>
+                        </div>
+                    </div>
+                    <div class="pt-6">
+                        <a href="#notifications" class="inline-flex items-center space-x-3 bg-white text-primary-dark font-black px-8 py-4 rounded-full hover:bg-accent transition-all uppercase tracking-widest text-xs">
+                            <span>Join the VIP List</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Get Updates -->
-            <div id="contact">
-                <h3 class="text-2xl font-bold mb-6 flex items-center">
-                    <span class="w-8 h-8 bg-yellow-500 text-[#2A4D85] rounded-full flex items-center justify-center mr-3 text-sm">03</span>
-                    Get Updates First
-                </h3>
-                <p class="text-stone-600 mb-6">
-                    Be the first to know about any upcoming deals or events by signing up for our VIP Notification List here.
-                </p>
-                <button class="bg-yellow-500 text-[#2A4D85] px-8 py-3 rounded-sm font-bold hover:bg-yellow-400 transition-colors uppercase text-sm tracking-widest">
-                    Sign Up
-                </button>
-                <div class="mt-4">
-                    <!-- Replace text/dates/stz/etz/details/location with your event info -->
-                    <a
-                        href="#"
-                        @click.prevent="openCalendar()"
-                        class="inline-flex items-center justify-center mt-3 bg-[#2A4D85] text-white px-6 py-2 rounded-sm hover:bg-stone-800 transition-colors uppercase text-xs font-bold tracking-widest"
-                    >
-                        Add to Google Calendar
-                    </a>
+    <!-- Testimonials Section -->
+    <section class="py-24 bg-slate-50 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-display font-black text-slate-900 mb-4 tracking-tight">What Our Bidders Say</h2>
+                <p class="text-slate-500">Real feedback from our local Buffalo community.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                    <div class="flex text-accent mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-slate-600 text-sm italic mb-6 leading-relaxed">"I've found incredible deals on tools and electronics. The pickup process is so smooth and the staff is always friendly. Highly recommend!"</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold mr-3">JS</div>
+                        <div>
+                            <div class="text-sm font-bold">John S.</div>
+                            <div class="text-[10px] text-slate-400 uppercase tracking-widest">Verified Bidder</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                    <div class="flex text-accent mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-slate-600 text-sm italic mb-6 leading-relaxed">"Bid Buffalo is my go-to for home goods. I saved over $400 on a new air fryer and coffee maker. It's addictive and fun!"</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold mr-3">MA</div>
+                        <div>
+                            <div class="text-sm font-bold">Maria A.</div>
+                            <div class="text-[10px] text-slate-400 uppercase tracking-widest">Verified Bidder</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+                    <div class="flex text-accent mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-slate-600 text-sm italic mb-6 leading-relaxed">"The best auction site in WNY. Transparent, honest, and great inventory. I love checking the new lots every Wednesday."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold mr-3">RK</div>
+                        <div>
+                            <div class="text-sm font-bold">Robert K.</div>
+                            <div class="text-[10px] text-slate-400 uppercase tracking-widest">Verified Bidder</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- VIP List Banner -->
-    <section id="notifications" class="bg-[#2A4D85] py-12 border-y-4 border-yellow-500">
+    <section id="notifications" class="bg-accent py-20">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-                <div class="text-center md:text-left">
-                    <h2 class="text-2xl font-bold text-white mb-2">Sign Up to Our VIP List</h2>
-                    <p class="text-yellow-500 text-sm">Be the first to receive notifications of deliveries of new products! Remember, we get limited quantities of each item and they go fast!</p>
-                </div>
-                <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-                    <input 
-                        type="email" 
-                        placeholder="Email Address*" 
-                        class="bg-white/10 border border-white/20 text-white px-4 py-2 rounded-sm focus:outline-none focus:border-yellow-500 w-full sm:w-64"
-                    >
-                    <input 
-                        type="text" 
-                        placeholder="First Name" 
-                        class="bg-white/10 border border-white/20 text-white px-4 py-2 rounded-sm focus:outline-none focus:border-yellow-500 w-full sm:w-48"
-                    >
-                    <button class="bg-yellow-500 text-[#2A4D85] font-bold px-8 py-2 rounded-sm hover:bg-yellow-400 transition-colors uppercase tracking-widest">
-                        Subscribe
-                    </button>
+            <div class="bg-primary-dark rounded-[3rem] p-8 md:p-16 relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                
+                <div class="grid lg:grid-cols-2 gap-12 items-center relative z-10">
+                    <div>
+                        <h2 class="text-4xl font-display font-black text-white mb-6 tracking-tight">Never Miss a Deal</h2>
+                        <p class="text-slate-300 text-lg mb-0 font-light">Join our VIP list to get notified the second new auctions go live. Limited quantities go fast!</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="flex-grow space-y-4">
+                            <input 
+                                type="email" 
+                                placeholder="Email Address*" 
+                                class="w-full bg-white/10 border border-white/20 text-white px-8 py-5 rounded-2xl focus:outline-none focus:ring-2 focus:ring-accent transition-all placeholder:text-white/30"
+                            >
+                            <input 
+                                type="text" 
+                                placeholder="First Name" 
+                                class="w-full bg-white/10 border border-white/20 text-white px-8 py-5 rounded-2xl focus:outline-none focus:ring-2 focus:ring-accent transition-all placeholder:text-white/30"
+                            >
+                        </div>
+                        <button class="bg-accent text-primary-dark font-black px-12 py-5 rounded-2xl hover:bg-white transition-all transform hover:scale-105 uppercase tracking-widest text-sm shadow-xl">
+                            Subscribe
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-stone-50 pt-20 pb-10 border-t border-stone-200">
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-16 mb-16">
-            <!-- About Us -->
-            <div id="about">
-                <h4 class="text-xl font-bold mb-6 border-b-2 border-yellow-500 pb-2 inline-block">About Us</h4>
-                <p class="text-stone-600 leading-relaxed text-sm">
-                    We sell items that were discontinued, sample models, end of line or were ordered online then returned because of various reasons: wrong item shipped, customer changed mind, damaged box, minor manufacture defect, etc.
+    <footer id="contact" class="bg-slate-50 pt-24 pb-12 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+            <div class="lg:col-span-1">
+                <img src="logo.png" alt="Bid Buffalo" class="h-12 mb-8" />
+                <p class="text-slate-500 text-sm leading-relaxed mb-8">
+                    Buffalo's premier online auction destination. We specialize in liquidated inventory, overstock, and returns from major online retailers.
                 </p>
-                <div class="flex space-x-4 mt-6">
-                    <a href="#" class="text-stone-400 hover:text-yellow-500 transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-stone-400 hover:text-yellow-500 transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                    <a href="#" class="text-stone-400 hover:text-yellow-500 transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 hover:text-primary hover:shadow-md transition-all border border-slate-200"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 hover:text-primary hover:shadow-md transition-all border border-slate-200"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                    <a href="#" class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 hover:text-primary hover:shadow-md transition-all border border-slate-200"><i data-lucide="twitter" class="w-5 h-5"></i></a>
                 </div>
             </div>
 
-            <!-- Hours & Location -->
             <div>
-                <h4 class="text-xl font-bold mb-6 border-b-2 border-yellow-500 pb-2 inline-block">Hours & Location</h4>
-                <div class="space-y-4 text-sm text-stone-600">
+                <h4 class="text-sm font-black uppercase tracking-widest text-slate-900 mb-8">Quick Links</h4>
+                <ul class="space-y-4 text-sm text-slate-500 font-medium">
+                    <li><a href="#home" class="hover:text-primary transition-colors">Home</a></li>
+                    <li><a href="#auctions" class="hover:text-primary transition-colors">Live Auctions</a></li>
+                    <li><a href="#how-it-works" class="hover:text-primary transition-colors">How It Works</a></li>
+                    <li><a href="#about" class="hover:text-primary transition-colors">About Us</a></li>
+                    <li><a href="#notifications" class="hover:text-primary transition-colors">VIP List</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-sm font-black uppercase tracking-widest text-slate-900 mb-8">Hours & Location</h4>
+                <div class="space-y-6 text-sm text-slate-500 font-medium">
                     <div class="flex items-start">
-                        <i data-lucide="map-pin" class="text-yellow-500 mr-3 mt-1 flex-shrink-0 w-4.5 h-4.5"></i>
-                        <p>123 Auction Street, Unit #716,<br>Buffalo, NY 14201</p>
+                        <i data-lucide="map-pin" class="text-accent mr-4 mt-1 w-5 h-5"></i>
+                        <p>123 Auction Street, Unit #716,<br />Buffalo, NY 14201</p>
                     </div>
                     <div class="flex items-start">
-                        <i data-lucide="clock" class="text-yellow-500 mr-3 mt-1 flex-shrink-0 w-4.5 h-4.5"></i>
+                        <i data-lucide="clock" class="text-accent mr-4 mt-1 w-5 h-5"></i>
                         <div>
-                            <p class="font-bold text-stone-800">Hours:</p>
-                            <p>Sun & Mon: Closed</p>
+                            <p class="font-bold text-slate-900 mb-1">Pickup Hours:</p>
                             <p>Tues-Fri: 9:00am - 5:00pm</p>
                             <p>Saturday: 10:30am - 2:30pm</p>
+                            <p class="text-slate-400 italic mt-1">Sun & Mon: Closed</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Contact & Map -->
-            <div id="contact">
-                <h4 class="text-xl font-bold mb-6 border-b-2 border-yellow-500 pb-2 inline-block">Contact</h4>
-                <div class="space-y-4 text-sm text-stone-600 mb-6">
+            <div>
+                <h4 class="text-sm font-black uppercase tracking-widest text-slate-900 mb-8">Contact Us</h4>
+                <div class="space-y-6 text-sm text-slate-500 font-medium">
                     <div class="flex items-center">
-                        <i data-lucide="phone" class="text-yellow-500 mr-3 flex-shrink-0 w-4.5 h-4.5"></i>
-                        <p>Phone: 716-555-0123</p>
+                        <i data-lucide="phone" class="text-accent mr-4 w-5 h-5"></i>
+                        <p>716-555-0123</p>
                     </div>
                     <div class="flex items-center">
-                        <i data-lucide="mail" class="text-yellow-500 mr-3 flex-shrink-0 w-4.5 h-4.5"></i>
-                        <p>Email: info@bidbuffalo.com</p>
+                        <i data-lucide="mail" class="text-accent mr-4 w-5 h-5"></i>
+                        <p>info@bidbuffalo.com</p>
                     </div>
                 </div>
-                <div class="rounded-lg overflow-hidden border border-stone-200 h-40">
+                <div class="mt-8 rounded-2xl overflow-hidden shadow-lg border border-slate-200 h-32">
                     <img 
                         src="https://picsum.photos/seed/map/400/200" 
                         alt="Map" 
-                        class="w-full h-full object-cover"
+                        class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
                         referrerpolicy="no-referrer"
                     >
                 </div>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 pt-8 border-t border-stone-200 text-center text-stone-400 text-xs">
-            <p>© Bid Buffalo Auction 2026 - Powered by Innovation</p>
+        <div class="max-w-7xl mx-auto px-4 pt-12 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em]">© 2026 Bid Buffalo Auction. All Rights Reserved.</p>
+            <div class="flex space-x-8 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                <a href="#" class="hover:text-primary transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-primary transition-colors">Terms of Service</a>
+            </div>
         </div>
     </footer>
 
