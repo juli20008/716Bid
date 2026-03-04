@@ -63,11 +63,99 @@
         });
     },
     openCalendar() {
-        window.open(
-            'https://calendar.google.com/calendar/r/eventedit?action=TEMPLATE&text=Bid%20Buffalo%20Weekly%20Auction%20Closing&dates=20260306T010000Z%2F20260306T020000Z&stz=America%2FNew_York&etz=America%2FNew_York&details=Upcoming%20Thursday%20night%20auction%20closing%20at%208%3A00%20PM%20ET.&location=Bid%20Buffalo%2C%20123%20Auction%20Street%2C%20Buffalo%2C%20NY',
-            '_blank',
-            'noopener'
-        );
+        const tz = 'America/New_York';
+        const now = new Date();
+        const parts = new Intl.DateTimeFormat('en-US', {
+            timeZone: tz,
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        }).formatToParts(now).reduce((acc, p) => {
+            acc[p.type] = p.value;
+            return acc;
+        }, {});
+
+        const year = Number(parts.year);
+        const month = Number(parts.month);
+        const day = Number(parts.day);
+
+        const weekday = new Intl.DateTimeFormat('en-US', {
+            timeZone: tz,
+            weekday: 'short'
+        }).format(now);
+
+        const weekdayMap = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+        const dow = weekdayMap[weekday];
+        const daysToThursday = dow === 4 ? 0 : (4 - dow + 7) % 7;
+
+        const targetDate = new Date(Date.UTC(year, month - 1, day));
+        targetDate.setUTCDate(targetDate.getUTCDate() + daysToThursday);
+
+        const targetYear = targetDate.getUTCFullYear();
+        const targetMonth = targetDate.getUTCMonth() + 1;
+        const targetDay = targetDate.getUTCDate();
+
+        function getTzOffsetMinutes(date) {
+            const dtf = new Intl.DateTimeFormat('en-US', {
+                timeZone: tz,
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            const parts = dtf.formatToParts(date).reduce((acc, p) => {
+                acc[p.type] = p.value;
+                return acc;
+            }, {});
+            const asUTC = Date.UTC(
+                Number(parts.year),
+                Number(parts.month) - 1,
+                Number(parts.day),
+                Number(parts.hour),
+                Number(parts.minute),
+                Number(parts.second)
+            );
+            return (asUTC - date.getTime()) / 60000;
+        }
+
+        function zonedTimeToUtc(y, m, d, h, mi) {
+            const guess = new Date(Date.UTC(y, m - 1, d, h, mi, 0));
+            const offset = getTzOffsetMinutes(guess);
+            return new Date(Date.UTC(y, m - 1, d, h, mi, 0) - offset * 60000);
+        }
+
+        function formatUtc(date) {
+            const pad = (n) => String(n).padStart(2, '0');
+            return (
+                date.getUTCFullYear() +
+                pad(date.getUTCMonth() + 1) +
+                pad(date.getUTCDate()) +
+                'T' +
+                pad(date.getUTCHours()) +
+                pad(date.getUTCMinutes()) +
+                '00Z'
+            );
+        }
+
+        const startUtc = zonedTimeToUtc(targetYear, targetMonth, targetDay, 20, 0);
+        const endUtc = new Date(startUtc.getTime() + 60 * 60 * 1000);
+
+        const url =
+            'https://calendar.google.com/calendar/r/eventedit?action=TEMPLATE' +
+            '&text=Bid%20Buffalo%20Weekly%20Auction%20Closing' +
+            '&dates=' + encodeURIComponent(formatUtc(startUtc) + '/' + formatUtc(endUtc)) +
+            '&stz=America%2FNew_York&etz=America%2FNew_York' +
+            '&details=Weekly%20auction%20closing%20at%208%3A00%20PM%20ET.' +
+            '&location=Bid%20Buffalo%2C%20123%20Auction%20Street%2C%20Buffalo%2C%20NY';
+
+        window.open(url, '_blank', 'noopener');
     },
     async handleInstall() {
         if (!this.installPrompt) {
@@ -417,9 +505,8 @@
                 <div class="mt-4">
                     <!-- Replace text/dates/stz/etz/details/location with your event info -->
                     <a
-                        href="https://calendar.google.com/calendar/r/eventedit?action=TEMPLATE&text=Bid%20Buffalo%20Weekly%20Auction%20Closing&dates=20260303T000000Z%2F20260303T010000Z&stz=America%2FNew_York&etz=America%2FNew_York&details=Weekly%20auction%20closing.%20Update%20date%2Ftime%20and%20details.&location=Bid%20Buffalo%2C%20123%20Auction%20Street%2C%20Buffalo%2C%20NY"
-                        target="_blank"
-                        rel="noopener"
+                        href="#"
+                        @click.prevent="openCalendar()"
                         class="inline-flex items-center justify-center mt-3 bg-[#2A4D85] text-white px-6 py-2 rounded-sm hover:bg-stone-800 transition-colors uppercase text-xs font-bold tracking-widest"
                     >
                         Add to Google Calendar
