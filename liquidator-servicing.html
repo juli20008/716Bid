@@ -41,45 +41,151 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
                 <div class="flex space-x-8 text-xs font-bold uppercase tracking-widest">
-                    <a href="index.html" class="hover:text-accent transition-colors">Back to Home</a>
+                    <a href="index.html" class="hover:text-accent transition-colors">Home</a>
+                    <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                        <a href="liquidator-servicing.html" class="text-emerald-400 hover:text-white transition-colors flex items-center">
+                            Liquidator Servicing
+                            <i data-lucide="chevron-down" class="w-3 h-3 ml-1"></i>
+                        </a>
+                        <div 
+                            x-show="open" 
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 translate-y-1"
+                            x-transition:enter-end="opacity-100 translate-y-0"
+                            class="absolute left-0 mt-0 w-64 bg-white rounded-xl shadow-2xl border border-slate-100 py-2 z-50"
+                        >
+                            <a href="liquidator-servicing.html" class="block px-4 py-3 text-[10px] font-bold text-slate-600 hover:bg-emerald-50 hover:text-emerald-600 transition-colors uppercase tracking-widest">
+                                Overview & Services
+                            </a>
+                            <a href="mass-process-hpc.html" class="block px-4 py-3 text-[10px] font-bold text-slate-600 hover:bg-emerald-50 hover:text-emerald-600 transition-colors uppercase tracking-widest border-t border-slate-50">
+                                Mass Process HPC to Manifest
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto px-4 py-20">
-        <div class="text-center mb-16">
-            <h1 class="text-5xl font-display font-black text-primary-dark mb-6">Liquidator Servicing</h1>
-            <p class="text-xl text-slate-600 leading-relaxed">
+    <!-- Hero Section -->
+    <section class="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://picsum.photos/seed/warehouse-logistics/1920/1080" 
+                alt="Warehouse Logistics" 
+                class="w-full h-full object-cover"
+                referrerpolicy="no-referrer"
+            />
+            <div class="absolute inset-0 bg-primary-dark/70 backdrop-blur-[2px]"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
+            <span class="inline-block bg-emerald-500 text-white text-[10px] font-black uppercase tracking-[0.3em] px-4 py-2 rounded-full mb-6 shadow-lg">Professional Solutions</span>
+            <h1 class="text-5xl md:text-7xl font-display font-black mb-6 leading-tight">Liquidator Servicing</h1>
+            <p class="text-xl md:text-2xl text-slate-200 leading-relaxed max-w-2xl mx-auto font-light">
                 Professional inventory management and liquidation solutions for retailers, manufacturers, and distributors.
             </p>
         </div>
+    </section>
 
-        <div class="grid md:grid-cols-2 gap-8 mb-20">
-            <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
-                <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mb-6">
-                    <i data-lucide="sparkles" class="w-6 h-6"></i>
+    <main class="max-w-6xl mx-auto px-4 py-20">
+        <div class="grid md:grid-cols-3 gap-8 mb-20">
+            <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 flex flex-col">
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mb-6">
+                    <i data-lucide="package" class="w-6 h-6"></i>
                 </div>
-                <h3 class="text-2xl font-display font-bold text-primary-dark mb-4">Mass Process Manifesting</h3>
-                <p class="text-slate-600 mb-6">Turn bulk photos into ready-to-upload manifests with AI. Fast, accurate, and built for liquidators.</p>
-                <a href="mass-process-hpc.html" class="inline-flex items-center text-sm font-bold uppercase tracking-widest text-primary hover:text-primary-light transition-colors">
-                    Learn More
-                    <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+                <h3 class="text-2xl font-display font-bold text-primary-dark mb-4">Inventory Recovery</h3>
+                <p class="text-slate-600 mb-6 flex-grow">We help you recover value from customer returns, overstock, and shelf-pulls through our high-velocity auction platform.</p>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 flex flex-col">
+                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
+                    <i data-lucide="truck" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-2xl font-display font-bold text-primary-dark mb-4">Logistics Support</h3>
+                <p class="text-slate-600 mb-6 flex-grow">Our team handles the heavy lifting, from pickup and sorting to cataloging and final distribution.</p>
+            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-xl border border-emerald-200 flex flex-col ring-2 ring-emerald-500/20">
+                <div class="w-12 h-12 bg-emerald-500 text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-emerald-200">
+                    <i data-lucide="zap" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-2xl font-display font-bold text-primary-dark mb-4">AI Mass Processing</h3>
+                <p class="text-slate-600 mb-6 flex-grow">Revolutionary AI-powered photo processing to generate manifests from bulk photos in minutes.</p>
+                <a href="mass-process-hpc.html" class="inline-flex items-center justify-center bg-emerald-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-emerald-700 transition-all group">
+                    View Service
+                    <i data-lucide="arrow-right" class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"></i>
                 </a>
             </div>
         </div>
 
-        <section class="bg-primary-dark text-white p-12 rounded-[2rem] shadow-2xl relative overflow-hidden">
+        <section class="bg-primary-dark text-white p-12 rounded-[2rem] shadow-2xl relative overflow-hidden" x-data="{ showModal: false }">
             <div class="relative z-10">
                 <h2 class="text-3xl font-display font-black mb-6">Partner With Us</h2>
                 <p class="text-slate-300 mb-8 max-w-2xl">
                     Join the network of retailers who trust Bid Buffalo to manage their liquidation needs with transparency and efficiency.
                 </p>
-                <a href="mailto:partners@bidbuffalo.com" class="inline-block bg-accent text-primary-dark font-black px-8 py-4 rounded-full hover:bg-white transition-all transform hover:scale-105 uppercase tracking-widest text-sm">
+                <button @click="showModal = true" class="inline-block bg-accent text-primary-dark font-black px-8 py-4 rounded-full hover:bg-white transition-all transform hover:scale-105 uppercase tracking-widest text-sm">
                     Contact Partnerships
-                </a>
+                </button>
             </div>
             <div class="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-[100px] -mr-32 -mt-32"></div>
+
+            <!-- Modal -->
+            <div 
+                x-show="showModal" 
+                class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-primary-dark/90 backdrop-blur-sm"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
+                style="display: none;"
+            >
+                <div 
+                    @click.away="showModal = false"
+                    class="bg-white rounded-[2rem] w-full max-w-lg p-8 md:p-12 shadow-2xl relative overflow-hidden"
+                    x-transition:enter="transition ease-out duration-300 transform"
+                    x-transition:enter-start="scale-95 translate-y-4"
+                    x-transition:enter-end="scale-100 translate-y-0"
+                >
+                    <button @click="showModal = false" class="absolute top-6 right-6 text-slate-400 hover:text-primary-dark transition-colors">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+
+                    <h3 class="text-3xl font-display font-black text-primary-dark mb-2">Partnership Intake</h3>
+                    <p class="text-slate-500 mb-8">Tell us about your inventory needs.</p>
+
+                    <form 
+                        x-data="{ name: '', email: '', photoNumber: '', message: '' }"
+                        @submit.prevent="
+                            const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0APhoto Number: ${photoNumber}%0D%0AMessage: ${message}`;
+                            window.location.href = `mailto:bidbuffalo716@gmail.com?subject=Partnership Inquiry from ${name}&body=${body}`;
+                            showModal = false;
+                        "
+                        class="space-y-4"
+                    >
+                        <div>
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Full Name</label>
+                            <input x-model="name" type="text" required class="w-full px-6 py-4 rounded-xl border border-slate-100 bg-slate-50 focus:bg-white focus:border-emerald-500 focus:outline-none transition-all text-primary-dark font-bold" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Email Address</label>
+                            <input x-model="email" type="email" required class="w-full px-6 py-4 rounded-xl border border-slate-100 bg-slate-50 focus:bg-white focus:border-emerald-500 focus:outline-none transition-all text-primary-dark font-bold" placeholder="john@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Estimated Photo Volume</label>
+                            <input x-model="photoNumber" type="number" class="w-full px-6 py-4 rounded-xl border border-slate-100 bg-slate-50 focus:bg-white focus:border-emerald-500 focus:outline-none transition-all text-primary-dark font-bold" placeholder="e.g. 50">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Message</label>
+                            <textarea x-model="message" required rows="4" class="w-full px-6 py-4 rounded-xl border border-slate-100 bg-slate-50 focus:bg-white focus:border-emerald-500 focus:outline-none transition-all text-primary-dark font-bold" placeholder="Tell us about your inventory..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-emerald-600 text-white font-black py-5 rounded-xl hover:bg-emerald-700 transition-all transform hover:scale-[1.02] shadow-xl uppercase tracking-widest mt-4">
+                            Send Inquiry
+                        </button>
+                    </form>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -94,4 +200,3 @@
     </script>
 </body>
 </html>
-
