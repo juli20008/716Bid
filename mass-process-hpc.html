@@ -31,34 +31,45 @@
             background-image: radial-gradient(at 0% 0%, rgba(30, 58, 138, 0.05) 0px, transparent 50%),
                               radial-gradient(at 100% 100%, rgba(251, 191, 36, 0.05) 0px, transparent 50%);
         }
+        /* Custom scroll margin for anchors if needed */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body class="bg-mesh font-sans">
-    <header class="bg-white py-6 flex flex-col items-center border-b border-slate-100">
-        <a href="index.html">
-            <img src="logo.jpg" alt="OneShot 20 Logo" class="h-20 md:h-24" />
-        </a>
-    </header>
+    <!-- Sticky Header & Nav Container -->
+    <div class="sticky top-0 z-50 shadow-md">
+        <header class="bg-white py-4 md:py-6 flex flex-col items-center border-b border-slate-100">
+            <a href="index.html">
+                <img src="logo.png" alt="OneShot 20 Logo" class="h-16 md:h-20" onerror="this.src='https://via.placeholder.com/200x80?text=OneShot+20'" />
+            </a>
+        </header>
 
-    <nav class="bg-primary text-white sticky top-0 z-50 shadow-md">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex space-x-8 text-xs font-bold uppercase tracking-widest">
-                    <a href="index.html" class="hover:text-accent transition-colors">Home</a>
-                    <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-                        <a href="#" class="text-emerald-400 hover:text-white transition-colors flex items-center">
-                            Solutions
-                            <i data-lucide="chevron-down" class="w-3 h-3 ml-1"></i>
-                        </a>
-                        <div x-show="open" class="absolute left-0 mt-0 w-64 bg-white rounded-xl shadow-2xl border border-slate-100 py-2 z-50">
-                            <a href="#" class="block px-4 py-3 text-[10px] font-bold text-slate-600 hover:bg-emerald-50 hover:text-emerald-600 transition-colors uppercase tracking-widest">Whatnot Bulk Lister</a>
-                            <a href="#" class="block px-4 py-3 text-[10px] font-bold text-slate-600 hover:bg-emerald-50 hover:text-emerald-600 transition-colors uppercase tracking-widest border-t">HiBid Inventory Pro</a>
+        <nav class="bg-primary text-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex justify-between items-center h-14 md:h-16">
+                    <div class="flex space-x-8 text-xs font-bold uppercase tracking-widest">
+                        <a href="index.html" class="hover:text-accent transition-colors">Home</a>
+                        <div class="relative group" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+                            <a href="#" class="text-emerald-400 hover:text-white transition-colors flex items-center">
+                                Solutions
+                                <i data-lucide="chevron-down" class="w-3 h-3 ml-1"></i>
+                            </a>
+                            <div x-show="open" 
+                                 x-transition:enter="transition ease-out duration-100"
+                                 x-transition:enter-start="opacity-0 transform scale-95"
+                                 x-transition:enter-end="opacity-100 transform scale-100"
+                                 class="absolute left-0 mt-0 w-64 bg-white rounded-xl shadow-2xl border border-slate-100 py-2 z-50">
+                                <a href="#" class="block px-4 py-3 text-[10px] font-bold text-slate-600 hover:bg-emerald-50 hover:text-emerald-600 transition-colors uppercase tracking-widest">Whatnot Bulk Lister</a>
+                                <a href="#" class="block px-4 py-3 text-[10px] font-bold text-slate-600 hover:bg-emerald-50 hover:text-emerald-600 transition-colors uppercase tracking-widest border-t">HiBid Inventory Pro</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
 
     <main class="max-w-6xl mx-auto px-4 py-16">
         <div class="text-center mb-24">
@@ -116,13 +127,13 @@
                         </p>
                     </div>
                     <div class="rounded-3xl overflow-hidden shadow-2xl border border-slate-100">
-                        <img src="images/bin1.JPG" alt="Capture" class="w-full h-auto" />
+                        <img src="images/bin1.JPG" alt="Capture" class="w-full h-auto" onerror="this.src='https://via.placeholder.com/600x400?text=Step+1+Capture'" />
                     </div>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div class="order-2 md:order-1 rounded-3xl overflow-hidden shadow-2xl border border-slate-100">
-                        <img src="images/nice croped photos with read code.png" alt="AI Extraction" class="w-full h-auto" />
+                        <img src="images/nice croped photos with read code.png" alt="AI Extraction" class="w-full h-auto" onerror="this.src='https://via.placeholder.com/600x400?text=Step+2+Extraction'" />
                     </div>
                     <div class="order-1 md:order-2">
                         <div class="inline-flex items-center gap-2 bg-blue-100 text-blue-700 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-4">Step 02</div>
@@ -142,7 +153,7 @@
                         </p>
                     </div>
                     <div class="rounded-3xl overflow-hidden shadow-2xl border border-slate-100">
-                        <img src="images/extracted manifest.png" alt="Export" class="w-full h-auto" />
+                        <img src="images/extracted manifest.png" alt="Export" class="w-full h-auto" onerror="this.src='https://via.placeholder.com/600x400?text=Step+3+ZIP+Export'" />
                     </div>
                 </div>
             </div>
@@ -187,7 +198,7 @@
                 </div>
                 <div class="p-12 md:p-20 flex flex-col justify-center items-center">
                     <div class="mb-10 text-center">
-                        <a href="files/inventory-package.zip" download class="inline-flex items-center justify-center bg-primary text-white font-black px-8 py-4 rounded-2xl hover:bg-primary-dark transition-all shadow-lg uppercase tracking-widest text-xs mb-4">
+                        <a href="#" class="inline-flex items-center justify-center bg-primary text-white font-black px-8 py-4 rounded-2xl hover:bg-primary-dark transition-all shadow-lg uppercase tracking-widest text-xs mb-4">
                             Download Sample (Photos + CSV)
                         </a>
                         <p class="text-xs text-slate-400">See the full package output</p>
