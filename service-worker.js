@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bid-buffalo-v2';
+const CACHE_NAME = 'bid-buffalo-v3';
 const urlsToCache = [
   '/',
   '/index.html',
